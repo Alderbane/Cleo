@@ -45,7 +45,26 @@ export class DashboardComponent implements OnInit {
               this.airtemp = item.airtemp;
               this.waterlevel = item.waterlevel;
               this.dirthum    = item.dirthum;
-              this.distance   = item.distance;
+              switch (item.distance) {
+                case "0":
+                    this.distance = "100"
+                    break;
+                case "1":
+                    this.distance = "75"
+                    break;  
+                case "2":
+                    this.distance = "50"
+                    break;  
+                case "3":
+                    this.distance = "25"
+                break;  
+                case "4":
+                    this.distance = "0"
+                break;  
+        
+              default:
+                  break;
+          }
               this.events.push(item);
           });
   }
