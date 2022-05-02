@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   events: any[];
   private deviceId: string;
   subscription: Subscription;
-  airhumidity: number = 0;
+  airhumidity: number;
   airtemp: number;
   waterlevel:string;
   dirthum:string;
@@ -42,10 +42,10 @@ export class DashboardComponent implements OnInit {
               let item = JSON.parse(data.payload.toString());
               console.log(item);
               this.airhumidity = item.airhumidity;
-              this.airtemp = item.airtemp;
+              this.airtemp = item.airtemperature;
               this.waterlevel = item.waterlevel;
               this.dirthum    = item.dirthum;
-              switch (item.distance) {
+              switch (item.distancia) {
                 case "0":
                     this.distance = "100"
                     break;
@@ -60,10 +60,10 @@ export class DashboardComponent implements OnInit {
                 break;  
                 case "4":
                     this.distance = "0"
-                break;  
-        
-              default:
-                  break;
+                break;
+                default:
+                  this.distance = item.distance;
+                break;
           }
               this.events.push(item);
           });
