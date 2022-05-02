@@ -7,7 +7,14 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-
+import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
+import { EventMqttService } from 'app/mqtt.service';
+const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'test.mosquitto.org',
+  port: 8081,
+  protocol: "wss" ,
+  path: '',
+};
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -17,13 +24,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
 
   ],
-  providers: [],
+  providers: [EventMqttService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
